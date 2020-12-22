@@ -1,6 +1,8 @@
 package com.syntechx.junit.helper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -26,5 +28,15 @@ public class StringHelperTest {
     @Test
     public void testTruncateAInFirst2Positions_AInLast2Positions() {
         assertEquals("CDAA", helper.truncateAInFirst2Positions("CDAA"));
+    }
+
+    @Test
+    public void testAreFirstAndLastTwoCharactersTheSame_BasicNegativeScenario() {
+        assertFalse(helper.areFirstAndLastTwoCharactersTheSame("ABCD"));
+    }
+
+    @Test
+    public void testAreFirstAndLastTwoCharactersTheSame_BasicPositiveScenario() {
+        assertTrue(helper.areFirstAndLastTwoCharactersTheSame("ABAB"));
     }
 }
