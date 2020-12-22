@@ -1,10 +1,17 @@
 package com.syntechx.junit.helper;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class QuickBeforeAfterTest {
+
+    @BeforeClass
+    public static void setupBeforeClass() {
+        System.out.println("Before class");
+    }
 
     @Before
     public void setup() {
@@ -24,5 +31,10 @@ public class QuickBeforeAfterTest {
     @After
     public void teardown() {
         System.out.println("After test");
+    }
+
+    @AfterClass
+    public static void teardownAfterClass() {
+        System.out.println("After class");
     }
 }
