@@ -12,5 +12,5 @@ public class TodoServiceStub implements TodoService {
             "Learn Spring",
             "Learn to Dance"
         );
-	}
+    }
 }
