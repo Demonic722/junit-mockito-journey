@@ -7,10 +7,12 @@ import com.syntechx.data.api.TodoService;
 
 /**
  * TodoBusinessImpl - SystemUnderTest (SUT)
- * TodoService - Dependency
  */
 public class TodoBusinessImpl {
 
+    /**
+     * Dependency
+     */
     private TodoService todoService;
     
     public TodoBusinessImpl(TodoService todoService) {
