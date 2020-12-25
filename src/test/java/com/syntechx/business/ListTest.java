@@ -1,6 +1,9 @@
 package com.syntechx.business;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -37,12 +40,36 @@ public class ListTest {
         assertEquals("syntechx", listMock.get(0));
     }
 
+    @Test
+    public void testListGetMock_UsingBDD() {
+        // Given
+        List<String> listMock = mock(List.class);
+
+        given(listMock.get(anyInt())).willReturn("syntechx");
+
+        // When
+        String firstElement = listMock.get(0);
+
+        // Then
+        assertThat(firstElement, is("syntechx"));
+    }
+
     @Test(expected = RuntimeException.class)
     public void testListGetMock_ThrowAnException() {
         List listMock = mock(List.class);
 
         // Argument Matcher (anyInt())
         when(listMock.get(anyInt())).thenThrow(new RuntimeException("Something"));
+
+        listMock.get(0);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void testListGetMock_MixingUp() {
+        List listMock = mock(List.class);
+
+        // Argument Matcher (anyInt())
+        when(listMock.subList(anyInt(), 5)).thenThrow(new RuntimeException("Something"));
 
         listMock.get(0);
     }
