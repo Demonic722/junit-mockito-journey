@@ -13,4 +13,7 @@ public class TodoServiceStub implements TodoService {
             "Learn to Dance"
         );
     }
+
+    @Override
+    public void deleteTodo(String todo) {}
 }
