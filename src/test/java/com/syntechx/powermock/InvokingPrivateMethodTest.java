@@ -10,13 +10,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(UtilityClass.class)
-public class MockingStaticMethodTest {
+public class InvokingPrivateMethodTest {
 
     @Mock
     private Dependency dependency;
@@ -25,19 +23,13 @@ public class MockingStaticMethodTest {
     private SystemUnderTest systemUnderTest;
 
     @Test
-    public void testStaticMethod_UsingPowerMockito() {
+    public void testPrivateMethodInvocation_UsingPowerMockito() throws Exception {
         List<Integer> stats = Arrays.asList(1, 2, 3);
         
         when(dependency.retrieveAllStats()).thenReturn(stats);
 
-        PowerMockito.mockStatic(UtilityClass.class);
-        when(UtilityClass.staticMethod(6)).thenReturn(150);
+        long result = Whitebox.invokeMethod(systemUnderTest, "privateMethodUnderTest");
 
-        int result = systemUnderTest.methodCallingAStaticMethod();
-
-        assertEquals(150, result);
-
-        PowerMockito.verifyStatic();
-        UtilityClass.staticMethod(6);
+        assertEquals(6, result);
     }
 }
